@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}{% endblock title %} </title>
+    <!-- -----------custom css--------------- -->
+    <link rel="stylesheet" href="{% static 'css/aStyle.css' %}">
+
+    <script src="https://kit.fontawesome.com/ddee993d4e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <nav>
+        <div class="navs-bar">
+            <div class="nav-logo">
+                <a href="{% url 'admin_app:admin' %}" class="logo">
+                    <img src="{% static 'img/logo.png' %}" alt="" class="logo-img">
+                    <img src="{% static 'img/logo-phone.png' %}" alt="" class="logo-icon">
+                </a>
+            </div>
+            <div class="nav-pofile" onclick="settingsMenuToogle()">
+                <a href="#" class="nav-profile"><img src="/media/{{request.user.profile.profile_pic}}" alt="img" height="55px" width="65px"></a>
+            </div>
+        </div>
+        <!-- ---------------------------profile dropdown---------------- -->
+        <div class="setting-menu" id="settingsMenu">
+            <div class="setting-menu-inner">
+                <div class="user-profile">
+                    <img src="/media/{{request.user.profile.profile_pic}}" alt="" height="70px" width="75px">
+                    <div>
+                        <p style="color: #fff;">{{request.user.profile.fullName}} </p>
+                        <a href="{% url 'admin_app:profile' %}">See your profile</a>
+                    </div>
+                </div>
+                <div class="settings-links">
+                    <img src="images/setting.png" alt="" class="settings-icon">
+                    <a href="#">settings & Privacy <img src="images/arrow.png" alt="" width="10px"></a>
+                </div>
+                <div class="settings-links">
+                    <img src="images/help.png" alt="" class="settings-icon">
+                    <a href="#">Help & Support <img src="images/arrow.png" alt="" width="10px"></a>
+                </div>
+                <div class="settings-links">
+                    <img src="images/display.png" alt="" class="settings-icon">
+                    <a href="#">Display & Accessibility <img src="images/arrow.png" alt="" width="10px"></a>
+                </div>
+                <div class="settings-links">
+                    <img src="images/logout.png" alt="" class="settings-icon">
+                    <a href="{% url 'login_app:logout' %}">Logout<img src="images/arrow.png" alt="" width="10px"></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="content">
+        <div class="side-nav">
+            <ul class="nav-links">
+                <li><a href="{% url 'admin_app:admin' %}"><i class="fa-solid fa-gauge"></i>Dashboard</a></li>
+                <li><a href="{% url 'admin_app:admin' %}"><i class="fas fa-comment-dots"></i>Messagge</a></li>
+                <li><a href="{% url 'admin_app:educations' %}"><i class="fas fa-graduation-cap"></i>Education</a></li>
+                <li><a href="{% url 'admin_app:skills' %}"><i class="fas fa-box-open"></i>Skills</a></li>
+                <li><a href="{% url 'admin_app:expriences' %}"><i class="fas fa-chart-pie"></i>Expriences</a></li>
+                <li><a href="{% url 'admin_app:profile' %}"><i class="fas fa-tools"></i>Profile</a></li>
+                <div class="active"></div>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="send-message">
+                {% block body_block %}
+
+
+                {% endblock body_block %}
+                    
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/admin.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'admin_app/admin_base.html' %}
+
+{% block title %} {{title}} {% endblock title %}
+
+{% block body_block %}
+<div class="mt-4">
+    <table class="table table-info table-striped table-hover">
+        <h4>Delete Skills </h4>
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Sl No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Time</th>
+                <th scope="col">Date</th>
+                <th scope="col">Delete</th>
+              </tr>
+        </thead>
+        <tbody> 
+            <tr>
+                <th scope="row">1</th>
+                <td>{{message.sender_name}} </td>
+                <td>{{message.sender_mail}}</td>
+                <td>{{message.send_time}}</td>
+                <td>{{message.send_date}}</td>
+                <td><form method='POST'> {% csrf_token %}<button type="submit" class="btn btn-danger" onclick="myFunction()">Confirm Delete</button></form></td>
+        </tbody>
+        </tbody>
+      </table>
+      <div class="container mt-4">
+        <p>{{message.sender_message}}</p>
+        <a class="btn btn-primary" href="{% url 'admin_app:admin' %}" role="button">Back</a>
+      </div>  
+</div>
+{% endblock body_block %}

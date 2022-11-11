@@ -1,0 +1,33 @@
+{% extends 'admin_app/admin_base.html' %}
+
+{% block title %} {{title}} {% endblock title %}
+
+{% block body_block %}
+<div class="mt-4">
+    <table class="table table-info table-striped table-hover">
+        <h4>Delete Skills </h4>
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Sl No</th>
+            <th scope="col">Joining Date</th>
+            <th scope="col">Leave Date</th>
+            <th scope="col">Designations</th>
+            <th scope="col">Organization</th>
+            <th scope="col">Back</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody> 
+        <tr>
+            <th scope="row">1</th>
+            <td>{{expriences.joning_date}} </td>
+            <td>{% if expriences.leav_date %} {{expriences.leav_date}}  {% else %} prresent {% endif %}</td>
+            <td>{{expriences.designation}}</td>
+            <td>{{expriences.organization_name}}</td>
+            <td><a class="btn btn-primary" href="{% url 'admin_app:educations'%}" role="button">Back</a></td>
+            <td><form method='POST'> {% csrf_token %}<button type="submit" class="btn btn-danger" onclick="myFunction()">Confirm Delete</button></form></td>
+        </tr>  
+        </tbody>
+      </table>
+</div>
+{% endblock body_block %}

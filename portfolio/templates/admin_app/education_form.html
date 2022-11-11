@@ -1,0 +1,54 @@
+{% extends 'admin_app/admin_base.html' %}
+{% load widget_tweaks %}
+
+{% block title %} {{title}} {% endblock title %}
+
+{% block body_block %}
+<div >
+    <form method='POST'> {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Passing Year</label>
+            {% render_field form.pass_year class="form-control" placeholder="Passing year" type="date" %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Instituate Name</label>
+            {% render_field form.instituate class="form-control" placeholder="Instituate name " %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Traning of Degree</label>
+            {% render_field form.degree class="form-control" placeholder="Subject name " %}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<div class="mt-4">
+    <table class="table table-info table-striped table-hover">
+        <h4>My Education </h4>
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Sl No</th>
+            <th scope="col">Passing Year</th>
+            <th scope="col">Degree Name</th>
+            <th scope="col">Instituate</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody> 
+         {% if educations %}
+            {% for education in educations %}
+            <tr>
+                <th scope="row">{{forloop.counter}} </th>
+                <td>{{education.pass_year}} </td>
+                <td>{{education.instituate}}</td>
+                <td>{{education.degree}}</td>
+                <td><a class="btn btn-primary" href="{% url 'admin_app:update_education' education.pk %}" role="button">Edit</a></td>
+                <td><a class="btn btn-danger" href="{% url 'admin_app:delete_education' education.pk %}" role="button">Delete</a></td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+      </table>
+</div>
+{% endblock body_block %}

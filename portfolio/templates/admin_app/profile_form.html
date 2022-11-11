@@ -1,0 +1,59 @@
+{% extends 'admin_app/admin_base.html' %}
+{% load widget_tweaks %}
+
+{% block title %} {{title}} {% endblock title %}
+
+{% block body_block %}
+<div >
+    <form method='POST' enctype='multipart/form-data'> {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Full Name</label>
+            {% render_field form.fullName class="form-control" placeholder="Full Name" %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Home Address</label>
+            {% render_field form.address_home class="form-control" placeholder="Home Address"%}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Office Address</label>
+            {% render_field form.address_office class="form-control" placeholder="Office Address" %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label d-flex">Phone Number</label>
+            <div class="d-flex w-100">
+                {% render_field form.phone_number class="form-control w-50" placeholder="Phone Number" %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Profile Pic</label>
+            {% render_field form.profile_pic class="form-control" placeholder="Office Address" %}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<div class="mt-4">
+    <table class="table table-info table-striped table-hover">
+        <h4>My Profile </h4>
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Profile Pic</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Office Address</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody> 
+            <tr>
+                <th scope="row"><img src="/media/{{request.user.profile.profile_pic}}" alt="" height="70px" width="75px"></th>
+                <td>{{request.user.profile.fullName}} </td>
+                <td>{{request.user.profile.phone_number}}</td>
+                <td>{{request.user.profile.address_home}}</td>
+                <td><a class="btn btn-primary" href="{% url 'admin_app:edit_profile' request.user.id %}" role="button">Edit</a></td>
+            </tr>
+        </tbody>
+      </table>
+</div>
+ 
+{% endblock body_block %}

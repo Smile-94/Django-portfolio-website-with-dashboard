@@ -1,0 +1,33 @@
+{% extends 'admin_app/admin_base.html' %}
+{% block title %} {{title}} {% endblock title %}
+
+{% block body_block %}
+<table class="table table-info table-striped table-hover">
+    <h4> Messages</h4>
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Sl No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Time</th>
+        <th scope="col">Date</th>
+        <th scope="col">View</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for message in messages %}
+        <tr>
+            <th scope="row">{{forloop.counter}} </th>
+            <td>{{message.sender_name}} </td>
+            <td>{{message.sender_mail}}</td>
+            <td>{{message.send_time}}</td>
+            <td>{{message.send_date}}</td>
+            <td><a class="btn btn-primary" href="{% url 'admin_app:message' message.pk %}" role="button">View</a></td>    
+            <td><a class="btn btn-danger" href="{% url 'admin_app:delete_message' message.pk %}" role="button">Delete</a></td>    
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>  
+  
+{% endblock body_block %}

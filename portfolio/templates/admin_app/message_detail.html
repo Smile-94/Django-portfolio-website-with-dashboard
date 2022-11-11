@@ -1,0 +1,28 @@
+{% extends 'admin_app/admin_base.html' %}
+
+{% block body_block %}
+<table class="table table-info table-striped table-hover">
+    <h4> Messages</h4>
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Sl No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Time</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>{{message.sender_name}} </td>
+            <td>{{message.sender_mail}}</td>
+            <td>{{message.send_time}}</td>
+            <td>{{message.send_date}}</td>
+    </tbody>
+  </table>
+  <div class="container">
+    <p>{{message.sender_message}}</p>
+    <a class="btn btn-primary" href="{% url 'admin_app:admin' %}" role="button">Back</a>
+  </div>  
+{% endblock body_block %}

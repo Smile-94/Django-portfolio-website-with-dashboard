@@ -1,0 +1,61 @@
+
+{% extends 'admin_app/admin_base.html' %}
+{% load widget_tweaks %}
+
+{% block title %} {{title}} {% endblock title %}
+
+{% block body_block %}
+<div >
+    <form method='POST'> {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Joining Date</label>
+            {% render_field form.joning_date class="form-control" placeholder="Passing year" type="date" %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Leave Date</label>
+            {% render_field form.leav_date class="form-control" placeholder="Passing year" type="date" %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Designation</label>
+            {% render_field form.designation class="form-control" placeholder="Designation " %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Organization</label>
+            {% render_field form.organization_name class="form-control" placeholder="Organization" %}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<div class="mt-4">
+    <table class="table table-info table-striped table-hover">
+        <h4>My Expriences </h4>
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Sl No</th>
+            <th scope="col">Joining Date</th>
+            <th scope="col">Leav Year</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Organization</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody> 
+         {% if expriences %}
+            {% for exprience in expriences %}
+            <tr>
+                <th scope="row">{{forloop.counter}} </th>
+                <td>{{exprience.joning_date}} </td>
+                <td>{% if exprience.leav_date  %} {{exprience.leav_date}} {% else %} Present {% endif %} </td>
+                <td>{{exprience.designation}}</td>
+                <td>{{exprience.organization_name}}</td>
+                <td><a class="btn btn-primary" href="{% url 'admin_app:update_exprience' exprience.pk %}" role="button">Edit</a></td>
+                <td><a class="btn btn-danger" href="{% url 'admin_app:delete_exprience' exprience.pk %}" role="button">Delete</a></td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+      </table>
+</div>
+{% endblock body_block %}

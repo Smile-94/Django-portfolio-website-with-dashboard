@@ -1,0 +1,31 @@
+{% extends 'admin_app/admin_base.html' %}
+
+{% block title %} {{title}} {% endblock title %}
+
+{% block body_block %}
+<div class="mt-4">
+    <table class="table table-info table-striped table-hover">
+        <h4>Delete Skills </h4>
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Sl No</th>
+            <th scope="col">Passing Year</th>
+            <th scope="col">Degree</th>
+            <th scope="col">Instituate</th>
+            <th scope="col">Back</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody> 
+        <tr>
+            <th scope="row">1</th>
+            <td>{{education.pass_year}} </td>
+            <td>{{education.degree}}</td>
+            <td>{{education.instituate}}</td>
+            <td><a class="btn btn-primary" href="{% url 'admin_app:educations'%}" role="button">Back</a></td>
+            <td><form method='POST'> {% csrf_token %}<button type="submit" class="btn btn-danger" onclick="myFunction()">Confirm Delete</button></form></td>
+        </tr>  
+        </tbody>
+      </table>
+</div>
+{% endblock body_block %}
